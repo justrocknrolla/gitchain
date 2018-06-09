@@ -53,7 +53,7 @@ function initScatter(callback) {
 function addRepo(repoName, price, callback) {
 	// re-init scatter
 	eos = null;
-	initScatter();
+	initScatter(callback);
 
 	let e = null;
 	try {
@@ -64,7 +64,7 @@ function addRepo(repoName, price, callback) {
 	catch(e) {
 		console.warn("error executing addRepo: " + e);
 	}
-	tryCallback(callback, e, e? null: "successfully created repo");
+	// tryCallback(callback, e, e? null: "successfully created repo");
 }
 
 function createLicense(repoName, callback) {
@@ -74,7 +74,7 @@ function createLicense(repoName, callback) {
 		if(err) {
 			return;
 		}
-		licensesBought(repoName);
+        showLicenses(licensesBought(repoName));
 	});
 
 	let e = null;
@@ -86,7 +86,6 @@ function createLicense(repoName, callback) {
 	catch(e) {
 		console.warn("error executing createLicense: " + e);
 	}
-	showLicenses(licensesBought(repoName));
 	tryCallback(callback, e, e? null: "successfully created license");
 }
 

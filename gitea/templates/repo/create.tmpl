@@ -110,9 +110,9 @@
 						<label></label>
 						<button class="ui green button" onclick="
 						event.preventDefault();
-						addRepo('owner', 'repo', 123, function (err, success) {
+						addRepo('repo', 123, function (err, success) {
 							if (err) {
-							    alert('Error: ' + err);
+							    // alert('Error: ' + err);
 							    return;
 							}
 							$('#createRepoForm').submit();
