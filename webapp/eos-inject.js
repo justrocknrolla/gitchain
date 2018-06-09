@@ -35,7 +35,7 @@ function initScatter() {
 	}
 }
 
-function addRepo(owner, repoName, price, callback) {
+function addRepo(repoName, price, callback) {
 	// init scatter if required
 	initScatter();
 
@@ -51,7 +51,7 @@ function addRepo(owner, repoName, price, callback) {
 	tryCallback(callback, e, e? null: "successfully created repo");
 }
 
-function createLicense(to, repoName, callback) {
+function createLicense(repoName, callback) {
 	// init scatter if required
 	initScatter();
 
