@@ -1,0 +1,37 @@
+<html>
+<head></head>
+<body>
+</body>
+<script type="text/javascript" src="eos-api.js"></script>
+<script type="text/javascript">
+document.addEventListener('scatterLoaded', scatterExtension => {
+	// Scatter will now be available from the window scope.
+	// At this stage the connection to Scatter from the application is
+	// already encrypted.
+	const scatter = window.scatter;
+
+	// take this off the window once we have a reference to it
+	window.scatter = null;
+
+	// connection settings
+	const network = {
+		blockchain: 'eos',
+		host: 'localhost', // ( or null if endorsed chainId )
+		port: 8888, // ( or null if defaulting to 80 )
+		chainId: 1 || 'abcd', // Or null to fetch automatically ( takes longer )
+	};
+
+	// Set up any extra options we want to use eosjs with.
+	const eosOptions = {};
+
+	// Get a reference to an 'Eosjs' instance with a Scatter signature provider.
+	const eos = scatter.eos(network, EosApi.Localnet, eosOptions, 'https');
+
+	asyncFlow(eos).then();
+});
+
+async function asyncFlow(eos) {
+	console.log(eos);
+}
+</script>
+</html>
