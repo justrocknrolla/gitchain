@@ -14,7 +14,7 @@ function initScatter() {
 		const scatter = window.scatter;
 
 		// take this off the window once we have a reference to it
-		window.scatter = null;
+		// window.scatter = null;
 
 		// connection settings
 		const network = {
