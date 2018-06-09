@@ -2,3 +2,6 @@
 .idea/
 data/
 db/
+
+*.wasm
+*.wast
