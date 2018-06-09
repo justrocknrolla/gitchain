@@ -43,7 +43,8 @@ function initScatter() {
 }
 
 function addRepo(repoName, price, callback) {
-	// init scatter if required
+	// re-init scatter
+	eos = null;
 	initScatter();
 
 	let e = null;
@@ -59,7 +60,8 @@ function addRepo(repoName, price, callback) {
 }
 
 function createLicense(repoName, callback) {
-	// init scatter if required
+	// re-init scatter
+	eos = null;
 	initScatter();
 
 	let e = null;
