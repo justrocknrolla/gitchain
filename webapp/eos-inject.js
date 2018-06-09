@@ -36,6 +36,9 @@ function initScatter() {
 }
 
 function addRepo(owner, repoName, price, callback) {
+	// init scatter if required
+	initScatter();
+
 	let e = null;
 	try {
 		eos.contract('licensing').then(contract => {
@@ -49,6 +52,9 @@ function addRepo(owner, repoName, price, callback) {
 }
 
 function createLicense(to, repoName, callback) {
+	// init scatter if required
+	initScatter();
+
 	let e = null;
 	try {
 		eos.contract('licensing').then(contract => {
@@ -61,8 +67,12 @@ function createLicense(to, repoName, callback) {
 	tryCallback(callback, e, "successfully created license");
 }
 
+// method stub for now, to be implemented later
 const licStore = {};
 function licensesBought(repoName, callback) {
+	// init scatter if required
+	initScatter();
+
 	let licenses = licStore[repoName] | 0;
 	licenses++;
 	licStore[repoName] = licenses;
