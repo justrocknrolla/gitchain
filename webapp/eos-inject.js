@@ -2,7 +2,7 @@
 let eos;
 
 // initialize scatter and EOS
-function initScatter() {
+function initScatter(callback) {
 	if(eos) {
 		// no need to reinitialize
 		return;
@@ -34,13 +34,16 @@ function initScatter() {
 		scatter.getIdentity().then(function() {
 			scatter.forgetIdentity().then(function() {
 				console.log("scatter integration check complete");
-			}).catch(function (err) {
-				console.error(444,err)
-            });
+				tryCallback(callback, null, "scatter integration check complete");
+			}).catch(function(err) {
+				console.warn(err);
+				tryCallback(callback, err, null);
+			});
 
-		}).catch(function (err) {
-			console.error(333,err)
-        });
+		}).catch(function(err) {
+			console.warn(err);
+			tryCallback(callback, err, null);
+		});
 	}
 	catch(e) {
 		console.warn("EOS initialization failed: " + e);
@@ -67,7 +70,12 @@ function addRepo(repoName, price, callback) {
 function createLicense(repoName, callback) {
 	// re-init scatter
 	eos = null;
-	initScatter();
+	initScatter(function(err, result) {
+		if(err) {
+			return;
+		}
+		licensesBought(repoName);
+	});
 
 	let e = null;
 	try {
