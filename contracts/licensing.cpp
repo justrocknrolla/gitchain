@@ -9,13 +9,54 @@ class licensing: public contract {
       public:
 
          //@abi action
-         void addrepo(const account_name owner, string& reponame) {
-            
+         void addrepo(const account_name owner, string& reponame, uint64_t licprice) {
+           /**
+            * We require that only the owner of an account can use this action
+            * or somebody with the account authorization
+            */
+            require_auth(owner);
+
+           /**
+            * We access the "repo" table as creating an object of type "repoIndex"
+            * As parameters we pass code & scope - _self from the parent contract
+            */
+            repoIndex repos(_self, _self);
+
+           /**
+            * We add the new player in the table
+            * The first argument is the payer of the storage which will store the data
+            */
+            repos.emplace(owner, [&](auto& repo) {
+               repo.owner = owner;
+               repo.reponame = reponame;
+               repo.licprice = licprice;
+            });
+
          }
 
          //@abi action
-         void getlicense(const account_name licto, string& reponame) {
-            
+         void createlicense(const account_name licto, string& reponame) {
+           /**
+            * We require that only the owner of an account can use this action
+            * or somebody with the account authorization
+            */
+            require_auth(licto);
+
+           /**
+            * We access the "repo" table as creating an object of type "repoIndex"
+            * As parameters we pass code & scope - _self from the parent contract
+            */
+            licenseIndex lics(_self, _self);
+
+           /**
+            * We add the new player in the table
+            * The first argument is the payer of the storage which will store the data
+            */
+            lics.emplace(licto, [&](auto& lic) {
+               lic.licto = licto;
+               lic.reponame = reponame;
+            });
+
          }
 
       private:
@@ -24,12 +65,13 @@ class licensing: public contract {
          struct repo {
             uint64_t owner;
             string reponame;
+            uint64_t licprice;
 
             uint64_t primary_key() const {
                return owner;
             }
 
-            EOSLIB_SERIALIZE(repo, (owner))
+            EOSLIB_SERIALIZE(repo, (owner)(reponame)(licprice))
          };
 
          typedef multi_index<N(repo), repo> repoIndex;
@@ -43,7 +85,7 @@ class licensing: public contract {
                return licto;
             }
 
-            EOSLIB_SERIALIZE(license, (licto))
+            EOSLIB_SERIALIZE(license, (licto)(reponame))
          };
 
          typedef multi_index<N(license), license> licenseIndex;
