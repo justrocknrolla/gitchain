@@ -48,7 +48,7 @@ function addRepo(owner, repoName, price, callback) {
 	catch(e) {
 		console.warn("error executing addRepo: " + e);
 	}
-	tryCallback(callback, e, "successfully created repo");
+	tryCallback(callback, e, e? null: "successfully created repo");
 }
 
 function createLicense(to, repoName, callback) {
@@ -64,7 +64,7 @@ function createLicense(to, repoName, callback) {
 	catch(e) {
 		console.warn("error executing createLicense: " + e);
 	}
-	tryCallback(callback, e, "successfully created license");
+	tryCallback(callback, e, e? null: "successfully created license");
 }
 
 // method stub for now, to be implemented later
