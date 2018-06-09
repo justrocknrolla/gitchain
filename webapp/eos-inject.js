@@ -1,13 +1,64 @@
-function addRepo(owner, repoName, price, callback) {
-	alert("successfully created repo");
+// EOS-JS API
+let eos;
 
-	tryCallback(callback, null, "successfully created repo");
+// initialize scatter and EOS
+function initScatter() {
+	if(eos) {
+		// no need to reinitialize
+		return;
+	}
+	try {
+		// Scatter will now be available from the window scope.
+		// At this stage the connection to Scatter from the application is
+		// already encrypted.
+		const scatter = window.scatter;
+
+		// take this off the window once we have a reference to it
+		window.scatter = null;
+
+		// connection settings
+		const network = {
+			blockchain: 'eos',
+			host: 'localhost', // ( or null if endorsed chainId )
+			port: 8888, // ( or null if defaulting to 80 )
+			chainId: 1 || 'abcd', // Or null to fetch automatically ( takes longer )
+		};
+
+		// Set up any extra options we want to use eosjs with.
+		const eosOptions = {};
+
+		// Get a reference to an 'Eosjs' instance with a Scatter signature provider.
+		eos = scatter.eos(network, EosApi.Localnet, eosOptions, 'https');
+	}
+	catch(e) {
+		console.warn("EOS initialization failed: " + e);
+	}
+}
+
+function addRepo(owner, repoName, price, callback) {
+	let e = null;
+	try {
+		eos.contract('licensing').then(contract => {
+			contract.addrepo(...args);
+		});
+	}
+	catch(e) {
+		console.warn("error executing addRepo: " + e);
+	}
+	tryCallback(callback, e, "successfully created repo");
 }
 
 function createLicense(to, repoName, callback) {
-	alert("successfully created license");
-
-	tryCallback(callback, null, "successfully created license");
+	let e = null;
+	try {
+		eos.contract('licensing').then(contract => {
+			contract.createlicense(...args);
+		});
+	}
+	catch(e) {
+		console.warn("error executing createLicense: " + e);
+	}
+	tryCallback(callback, e, "successfully created license");
 }
 
 const licStore = {};
