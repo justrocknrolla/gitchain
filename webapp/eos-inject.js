@@ -12,7 +12,7 @@ function createLicense(to, repoName, callback) {
 
 const licStore = {};
 function licensesBought(repoName, callback) {
-	let licenses = licStore[repoName] | 0;
+	let licenses = licStore[repoName] || 0;
 	licenses++;
 	licStore[repoName] = licenses;
 	tryCallback(callback, null, licenses);
