@@ -1,0 +1,24 @@
+-
+  id: 1
+  user_id: 2
+  op_type: 12 # close issue
+  act_user_id: 2
+  repo_id: 2
+  is_private: true
+
+-
+  id: 2
+  user_id: 3
+  op_type: 2 # rename repo
+  act_user_id: 2
+  repo_id: 3
+  is_private: true
+  content: oldRepoName
+
+-
+  id: 3
+  user_id: 11
+  op_type: 1 # create repo
+  act_user_id: 11
+  repo_id: 9
+  is_private: false

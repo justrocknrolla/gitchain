@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Eos from 'eosjs';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import CoderPage from "./CoderPage";
+import BuyerPage from "./BuyerPage";
 
 class App extends Component {
     state = {};
@@ -34,7 +37,7 @@ class App extends Component {
     };
 
     render() {
-        const info = this.state.info;
+        /*const info = this.state.info;
         return info ? (
             <div className="App">
                 <div className="App-intro" style={{padding: 10}}>
@@ -52,7 +55,15 @@ class App extends Component {
                     <button type={'button'} onClick={this.getIdentity}>Get Identity</button>
                 </div>
             </div>
-        ) : null;
+        ) : null;*/
+        return <div>
+            <Router>
+                <Switch>
+                    <Route exact path={'/coder'} component={CoderPage}/>
+                    <Route exact path={'/buyer'} component={BuyerPage}/>
+                </Switch>
+            </Router>
+        </div>
     }
 }
 
