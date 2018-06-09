@@ -31,11 +31,16 @@ function initScatter() {
 		eos = scatter.eos(network, EosApi.Localnet, eosOptions, 'https');
 
 		// check scatter integration
-		eos.getIdentity().then(function() {
-			eos.forgetIdentity().then(function() {
+		scatter.getIdentity().then(function() {
+			scatter.forgetIdentity().then(function() {
 				console.log("scatter integration check complete");
-			});
-		});
+			}).catch(function (err) {
+				console.error(444,err)
+            });
+
+		}).catch(function (err) {
+			console.error(333,err)
+        });
 	}
 	catch(e) {
 		console.warn("EOS initialization failed: " + e);
