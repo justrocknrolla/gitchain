@@ -75,13 +75,18 @@
 							<input type="hidden" name="license" value="{{.license}}">
 							<div class="default text">{{.i18n.Tr "repo.license_helper"}}</div>
 							<div class="menu">
+								<div class="item" data-value="commercial" onclick="$('#price').show()"><b>Commercial</b></div>
 								{{range .Licenses}}
 									<div class="item" data-value="{{.}}">{{.}}</div>
 								{{end}}
 							</div>
 						</div>
 					</div>
-
+					<div id="price" class="inline required field" style="display: none">
+						<label for="repo_price">Price</label>
+						<input id="repo_price" name="repo_price" value="" autofocus required>
+						<span class="help">Please provide price of single License in EOS</span>
+					</div>
 					<div class="inline field">
 						<label>{{.i18n.Tr "repo.readme"}}</label>
 						<div class="ui selection dropdown">
