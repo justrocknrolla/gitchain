@@ -64,6 +64,11 @@ function createLicense(repoName, callback) {
 	catch(e) {
 		console.warn("error executing createLicense: " + e);
 	}
+
+	let licenses = licStore[repoName] | 0;
+	licenses++;
+	licStore[repoName] = licenses;
+
 	tryCallback(callback, e, e? null: "successfully created license");
 }
 
