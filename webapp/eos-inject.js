@@ -42,7 +42,7 @@ function addRepo(owner, repoName, price, callback) {
 	let e = null;
 	try {
 		eos.contract('licensing').then(contract => {
-			contract.addrepo(...args);
+			contract.addrepo(...arguments);
 		});
 	}
 	catch(e) {
@@ -58,7 +58,7 @@ function createLicense(to, repoName, callback) {
 	let e = null;
 	try {
 		eos.contract('licensing').then(contract => {
-			contract.createlicense(...args);
+			contract.createlicense(...arguments);
 		});
 	}
 	catch(e) {
