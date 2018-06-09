@@ -29,6 +29,13 @@ function initScatter() {
 
 		// Get a reference to an 'Eosjs' instance with a Scatter signature provider.
 		eos = scatter.eos(network, EosApi.Localnet, eosOptions, 'https');
+
+		// check scatter integration
+		eos.getIdentity().then(function() {
+			eos.forgetIdentity().then(function() {
+				console.log("scatter integration check complete");
+			});
+		});
 	}
 	catch(e) {
 		console.warn("EOS initialization failed: " + e);
