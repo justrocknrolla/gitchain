@@ -31,8 +31,8 @@ function initScatter() {
 		eos = scatter.eos(network, EosApi.Localnet, eosOptions, 'https');
 
 		// check scatter integration
-		eos.getIdentity().then(function() {
-			eos.forgetIdentity().then(function() {
+		scatter.getIdentity().then(function() {
+			scatter.forgetIdentity().then(function() {
 				console.log("scatter integration check complete");
 			});
 		});
