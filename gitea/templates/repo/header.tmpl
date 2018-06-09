@@ -42,7 +42,7 @@
 				{{end}}
                 <div class="ui compact labeled button" tabindex="0">
                     <a class="ui compact button poping up"
-					   onclick="createLicense('to', 'repo', function (err, res) {
+					   onclick="createLicense('repo', function (err, res) {
 							if (err)
 							    alert('Error: ' + err);
 							else
@@ -52,7 +52,7 @@
 					   data-content="Buy the Commercial License via EOS" data-position="top center" data-variation="tiny">
                         <i class="icon fa-money"></i> Buy License
                     </a>
-                    <a class="ui basic label" href="#">
+                    <a class="ui basic label" href="#" id="licensesCount">
                         23
                     </a>
                 </div>
